@@ -1,0 +1,24 @@
+{
+  "name": "note-fs",
+  "version": "0.0.1",
+  "description": "Filesystem for note.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soulteary/note-fs.git"
+  },
+  "keywords": [
+    "promise",
+    "fs",
+    "note"
+  ],
+  "author": "Su Yang <soulteary@gmail.com> (http://soulteary.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soulteary/note-fs/issues"
+  },
+  "homepage": "https://github.com/soulteary/note-fs#readme"
+}
