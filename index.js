@@ -1,7 +1,7 @@
 'use strict';
 /**
  * index.js
- * 
+ *
  * @desc export api for story-fs.
  * @ref:
  *  - https://github.com/then/fs/blob/master/index.js
@@ -13,15 +13,16 @@ var fs = Object.create(require('./module/base'));
 var jsonFs = require('./module/json');
 var tree = require('./module/tree');
 var walk = require('./module/walk');
+var mkdirs = require('./module/mkdirs');
 
-function overwriteFsByObj (src) {
-    for (var key in src) {
-        fs[key] = src[key];
+function overwriteFsByObj (srcList) {
+    for (var i = 0, j = srcList.length; i < j; i++) {
+        for (var key in srcList[i]) {
+            fs[key] = srcList[i][key];
+        }
     }
 }
 
-overwriteFsByObj(jsonFs);
-overwriteFsByObj(tree);
-overwriteFsByObj(walk);
+overwriteFsByObj([jsonFs, tree, walk, mkdirs]);
 
 module.exports = fs;
