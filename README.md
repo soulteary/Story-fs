@@ -2,6 +2,12 @@
 
 Story Filesystem, simple async fs wrapper.
 
+I really like some package, but I wanted a lean package with zero deps too.
+
+## todo
+
+- walk test.
+
 # API
 
 ## JSON
@@ -19,6 +25,10 @@ Story Filesystem, simple async fs wrapper.
 
 - tree
 - treeSync
+
+## Walk
+
+- walk
 
 ## etc.
 

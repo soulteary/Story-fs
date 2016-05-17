@@ -1,6 +1,6 @@
 {
   "name": "story-fs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Story Filesystem.",
   "main": "index.js",
   "scripts": {

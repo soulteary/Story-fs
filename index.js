@@ -12,6 +12,7 @@
 var fs = Object.create(require('./module/base'));
 var jsonFs = require('./module/json');
 var tree = require('./module/tree');
+var walk = require('./module/walk');
 
 function overwriteFsByObj (src) {
     for (var key in src) {
@@ -21,5 +22,6 @@ function overwriteFsByObj (src) {
 
 overwriteFsByObj(jsonFs);
 overwriteFsByObj(tree);
+overwriteFsByObj(walk);
 
 module.exports = fs;
