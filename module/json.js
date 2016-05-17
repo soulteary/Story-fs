@@ -11,7 +11,7 @@ function readFile (file, options) {
             var obj;
             var error;
             try {
-                obj = JSON.parse(data, options ? options.reviver: null)
+                obj = JSON.parse(data, options ? options.reviver : null)
             } catch (err2) {
                 err2.message = file + ': ' + err2.message;
                 error = err2;
@@ -29,10 +29,10 @@ function readFile (file, options) {
 function readFileSync (file, options) {
     options = options || {};
     if (typeof options === 'string') {
-        options = {encoding : options};
+        options = {encoding: options};
     }
 
-    var shouldThrow = 'throws' in options ? options.throws: true;
+    var shouldThrow = 'throws' in options ? options.throws : true;
     var content = fs.readFileSync(file, options);
 
     try {
@@ -55,14 +55,14 @@ function writeFile (file, obj, options, callback) {
 
     var spaces = typeof options === 'object' && options !== null
         ? 'spaces' in options
-        ? options.spaces: this.spaces
+        ? options.spaces : this.spaces
         : this.spaces;
 
     var str = '';
     var error = false;
 
     try {
-        str = JSON.stringify(obj, options ? options.replacer: null, spaces) + '\n'
+        str = JSON.stringify(obj, options ? options.replacer : null, spaces) + '\n'
     } catch (err) {
         error = err;
     }
@@ -90,7 +90,7 @@ function writeFileSync (file, obj, options) {
 
     var spaces = typeof options === 'object' && options !== null
         ? 'spaces' in options
-        ? options.spaces: this.spaces
+        ? options.spaces : this.spaces
         : this.spaces;
 
     var str = JSON.stringify(obj, options.replacer, spaces) + '\n';
@@ -100,12 +100,12 @@ function writeFileSync (file, obj, options) {
 
 module.exports = {
     // jsonfile exports
-    readJson      : readFile,
-    readJSON      : readFile,
-    readJsonSync  : readFileSync,
-    readJSONSync  : readFileSync,
-    writeJson     : writeFile,
-    writeJSON     : writeFile,
-    writeJsonSync : writeFileSync,
-    writeJSONSync : writeFileSync
+    readJson     : readFile,
+    readJSON     : readFile,
+    readJsonSync : readFileSync,
+    readJSONSync : readFileSync,
+    writeJson    : writeFile,
+    writeJSON    : writeFile,
+    writeJsonSync: writeFileSync,
+    writeJSONSync: writeFileSync
 };

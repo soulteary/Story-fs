@@ -33,9 +33,9 @@ function tree (rootDir, exclude, maxDepth, needJson) {
         }
 
         var item = {
-            fullPath : path.resolve(rootDir, name),
-            path     : path.relative(rootDir, name),
-            name     : path.basename(name)
+            fullPath: path.resolve(rootDir, name),
+            path    : path.relative(rootDir, name),
+            name    : path.basename(name)
         };
 
         if (!_depth) {
@@ -99,8 +99,8 @@ function tree (rootDir, exclude, maxDepth, needJson) {
         }
 
         var LINE = {
-            siblings : '├── ',
-            single   : '└── '
+            siblings: '├── ',
+            single  : '└── '
         };
 
         var result = '';
@@ -119,7 +119,7 @@ function tree (rootDir, exclude, maxDepth, needJson) {
                 if (_depth) {
                     // is last one
                     for (var m = 1, n = lastOptions.length; m < n; m++) {
-                        result += ((_isLast[m - 1] ? ' ': '|') + ' '.repeat(4));
+                        result += ((_isLast[m - 1] ? ' ' : '|') + ' '.repeat(4));
                     }
                     if (last) {
                         result += LINE.single;
@@ -229,6 +229,6 @@ function asyncTree (options) {
 }
 
 module.exports = {
-    tree     : asyncTree,
-    treeSync : init
+    tree    : asyncTree,
+    treeSync: init
 };

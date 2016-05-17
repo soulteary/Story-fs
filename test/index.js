@@ -49,7 +49,7 @@ Promise.all([
     test(storyFs.unlink.bind(null, __dirname + '/fixture/file.txt'), 'unlink'),
 
     test(function () {
-        return storyFs.writeJSON(__dirname + '/fixture/file.json', {1 : 2, 2 : 3})
+        return storyFs.writeJSON(__dirname + '/fixture/file.json', {1: 2, 2: 3})
             .then(function (data) {
                 assert(data === true);
             });
@@ -57,7 +57,7 @@ Promise.all([
     test(function () {
         return storyFs.readJSON(__dirname + '/fixture/file.json')
             .then(function (data) {
-                assert(JSON.stringify(data) === JSON.stringify({1 : 2, 2 : 3}));
+                assert(JSON.stringify(data) === JSON.stringify({1: 2, 2: 3}));
             });
     }, 'readJSON'),
     test(storyFs.unlink.bind(null, __dirname + '/fixture/file.json')),
@@ -72,34 +72,34 @@ Promise.all([
     test(function () {
         var treeCount = 0;
         return storyFs.tree({
-                cwd     : process.env.PWD,
-                depth   : 4,
-                exclude : {
-                    path : ['.git', '.idea', 'node_modules'],
-                    mode : 'children'
+                cwd    : process.env.PWD,
+                depth  : 4,
+                exclude: {
+                    path: ['.git', '.idea', 'node_modules'],
+                    mode: 'children'
                 },
-                json    : true
+                json   : true
             }
         ).then(function (treeData) {
-                if (treeData.children) {
-                    treeData.children.filter(function (item) {
-                        if (item.name === 'index.js') {
-                            treeCount++;
-                            return true;
-                        } else {
-                            if (item.children && item.children.length) {
-                                item.children.filter(function (item) {
-                                    if (['base.js', 'json.js', 'tree.js', 'index.js'].indexOf(item.name) > -1) {
-                                        treeCount++;
-                                        return true;
-                                    }
-                                });
-                            }
+            if (treeData.children) {
+                treeData.children.filter(function (item) {
+                    if (item.name === 'index.js') {
+                        treeCount++;
+                        return true;
+                    } else {
+                        if (item.children && item.children.length) {
+                            item.children.filter(function (item) {
+                                if (['base.js', 'json.js', 'tree.js', 'index.js'].indexOf(item.name) > -1) {
+                                    treeCount++;
+                                    return true;
+                                }
+                            });
                         }
-                    });
-                }
-                return treeCount === 5;
-            });
+                    }
+                });
+            }
+            return treeCount === 5;
+        });
     }, 'tree')
 ]).then(function (r) {
     if (r.some(function (r) {return r === false;})) {

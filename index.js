@@ -1,5 +1,8 @@
 'use strict';
 /**
+ * index.js
+ * 
+ * @desc export api for story-fs.
  * @ref:
  *  - https://github.com/then/fs/blob/master/index.js
  *  - https://github.com/matthew-andrews/denodeify/blob/master/index.js
