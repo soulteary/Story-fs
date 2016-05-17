@@ -1,4 +1,4 @@
-var fs = require('graceful-fs')
+var fs = require('fs')
 var path = require('path')
 var invalidWin32Path = require('./win32').invalidWin32Path
 
