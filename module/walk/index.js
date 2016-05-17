@@ -60,4 +60,6 @@ function walk (root, options) {
     return new Walker(root, options)
 }
 
-module.exports = walk
+module.exports = {
+    walk: walk
+}
