@@ -14,6 +14,7 @@ var jsonFs = require('./module/json');
 var tree = require('./module/tree');
 var walk = require('./module/walk');
 var mkdirs = require('./module/mkdirs');
+var delFs = require('del');
 
 function overwriteFsByObj (srcList) {
     for (var i = 0, j = srcList.length; i < j; i++) {
@@ -23,6 +24,14 @@ function overwriteFsByObj (srcList) {
     }
 }
 
-overwriteFsByObj([jsonFs, tree, walk, mkdirs]);
+var syncDel = delFs.sync;
+var asyncDel = delFs;
+delete asyncDel.sync;
+delFs = {
+    del: asyncDel,
+    syncDel:syncDel
+}
+console.log(delFs)
+overwriteFsByObj([jsonFs, tree, walk, mkdirs, delFs]);
 
 module.exports = fs;

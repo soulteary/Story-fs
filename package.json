@@ -1,6 +1,6 @@
 {
   "name": "story-fs",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Story Filesystem.",
   "main": "index.js",
   "scripts": {
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/soulteary/Story-fs/issues"
   },
-  "homepage": "https://github.com/soulteary/Story-fs#readme"
+  "homepage": "https://github.com/soulteary/Story-fs#readme",
+  "dependencies": {
+    "del": "^2.2.1"
+  }
 }

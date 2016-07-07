@@ -69,6 +69,7 @@ Promise.all([
                 throw new Error('directory still exists after rmdir')
             }, function () {});
     }, 'stat directory'),
+
     test(function () {
         var treeCount = 0;
         return storyFs.tree({
@@ -100,7 +101,18 @@ Promise.all([
             }
             return treeCount === 5;
         });
-    }, 'tree')
+    }, 'tree'),
+
+    test(function () {
+        return storyFs.mkdir(__dirname + '/fixture')
+            .then(storyFs.writeFile(__dirname + '/fixture/file.txt'))
+            .then(storyFs.del([__dirname + '/fixture/']))
+            .then(function (err) {
+                if (err) return false;
+                return true;
+            })
+    }, 'del')
+
 ]).then(function (r) {
     if (r.some(function (r) {return r === false;})) {
         console.error('Some test suit failed.');
