@@ -1,57 +1,65 @@
-var fs = require('fs')
-var path = require('path')
-var invalidWin32Path = require('./win32').invalidWin32Path
+'use strict';
 
-var o777 = parseInt('0777', 8)
+var fs = require('fs');
+var path = require('path');
+var invalidWin32Path = require('./win32').invalidWin32Path;
 
-function mkdirsSync (p, opts, made) {
-    if (!opts || typeof opts !== 'object') {
-        opts = {mode: opts}
-    }
+var o777 = parseInt('0777', 8);
 
-    var mode = opts.mode
-    var xfs = opts.fs || fs
+function mkdirsSync(p, opts, made) {
+  if (!opts || typeof opts !== 'object') {
+    opts = {mode: opts};
+  }
 
-    if (process.platform === 'win32' && invalidWin32Path(p)) {
-        var errInval = new Error(p + ' contains invalid WIN32 path characters.')
-        errInval.code = 'EINVAL'
-        throw errInval
-    }
+  var mode = opts.mode;
+  var xfs = opts.fs || fs;
 
-    if (mode === undefined) {
-        mode = o777 & (~process.umask())
-    }
-    if (!made) made = null
+  if (process.platform === 'win32' && invalidWin32Path(p)) {
+    var errInval = new Error(p + ' contains invalid WIN32 path characters.');
+    errInval.code = 'EINVAL';
+    throw errInval;
+  }
 
-    p = path.resolve(p)
+  if (mode === undefined) {
+    mode = o777 & (~process.umask());
+  }
+  if (!made) {
+    made = null;
+  }
 
-    try {
-        xfs.mkdirSync(p, mode)
-        made = made || p
-    } catch (err0) {
-        switch (err0.code) {
-            case 'ENOENT':
-                if (path.dirname(p) === p) throw err0
-                made = mkdirsSync(path.dirname(p), opts, made)
-                mkdirsSync(p, opts, made)
-                break
+  p = path.resolve(p);
 
-            // In the case of any other error, just see if there's a dir
-            // there already.  If so, then hooray!  If not, then something
-            // is borked.
-            default:
-                var stat
-                try {
-                    stat = xfs.statSync(p)
-                } catch (err1) {
-                    throw err0
-                }
-                if (!stat.isDirectory()) throw err0
-                break
+  try {
+    xfs.mkdirSync(p, mode);
+    made = made || p;
+  } catch (err0) {
+    switch (err0.code) {
+      case 'ENOENT':
+        if (path.dirname(p) === p) {
+          throw err0;
         }
-    }
+        made = mkdirsSync(path.dirname(p), opts, made);
+        mkdirsSync(p, opts, made);
+        break;
 
-    return made
+        // In the case of any other error, just see if there's a dir
+        // there already.  If so, then hooray!  If not, then something
+        // is borked.
+      default:
+        var stat;
+        try {
+          stat = xfs.statSync(p);
+        } catch (err1) {
+          throw err0;
+        }
+        if (!stat.isDirectory()) {
+          throw err0;
+        }
+        break;
+    }
+  }
+
+  return made;
 }
 
-module.exports = mkdirsSync
+module.exports = mkdirsSync;

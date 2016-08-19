@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * use async fs.
  * @ref https://github.com/jprichardson/node-jsonfile 2.2.3

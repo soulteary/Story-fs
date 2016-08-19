@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * yes-tree
  *
